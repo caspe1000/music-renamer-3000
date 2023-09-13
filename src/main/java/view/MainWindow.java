@@ -26,20 +26,21 @@ public class MainWindow extends JFrame {
 
     private void setupFrame() {
         setTitle("MUSIC RENAMER 3000");
-        setSize(500, 700);
+        setSize(600, 700);
         setLocation(900, 100);
         setVisible(true);
         setContentPane(mainPanel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
+        initButtons();
         this.revalidate();
     }
 
-    private void buttons() {
+    private void initButtons() {
         btnOpen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                controller.loadTrack();
             }
         });
     }
