@@ -8,6 +8,21 @@
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
     </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.mpatric</groupId>
+            <artifactId>mp3agic</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+
+    </dependencies>
+
+
   <name>Archetype - music-renamer-3000</name>
   <url>http://maven.apache.org</url>
+
+
 </project>

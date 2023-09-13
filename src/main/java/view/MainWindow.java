@@ -1,6 +1,10 @@
 package view;
 
+import controller.Controller;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame {
 
@@ -12,9 +16,12 @@ public class MainWindow extends JFrame {
     private JPanel pnlBot;
     private JScrollPane jspTracklist;
     private JTable tblTracklist;
+    private JButton btnOpen;
+    private Controller controller;
 
-    public MainWindow() {
+    public MainWindow(Controller controller) {
         setupFrame();
+        this.controller = controller;
     }
 
     private void setupFrame() {
@@ -26,5 +33,14 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         this.revalidate();
+    }
+
+    private void buttons() {
+        btnOpen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 }
