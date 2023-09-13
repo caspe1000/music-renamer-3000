@@ -16,7 +16,7 @@ public class TrackLoader {
     }
 
 
-    public String loadTrack(){
+    public File loadTrack(){
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -26,9 +26,8 @@ public class TrackLoader {
 
         if (dlg == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            filePath = file.getPath();
-            return filePath;
+            return file;
         }
-        return "";
+        return null;
     }
 }

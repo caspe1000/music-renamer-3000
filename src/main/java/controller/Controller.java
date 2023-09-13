@@ -1,7 +1,10 @@
 package controller;
 
+import model.Track;
 import model.TrackManager;
 import view.MainWindow;
+
+import java.io.File;
 
 public class Controller {
 
@@ -15,7 +18,11 @@ public class Controller {
     }
 
     public void loadTrack() {
-        String filePath = trackLoader.loadTrack();
-        trackManager.importTrack(filePath);
+        File file = trackLoader.loadTrack();
+        trackManager.importTrack(file);
+    }
+
+    public void addTrackToTable(Track track) {
+        view.addTrackToTable(track.getFilename(), track.getTitle(), track.getArtist(), track.getAlbum());
     }
 }

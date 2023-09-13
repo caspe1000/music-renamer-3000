@@ -3,8 +3,12 @@ package view;
 import controller.Controller;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainWindow extends JFrame {
 
@@ -18,6 +22,8 @@ public class MainWindow extends JFrame {
     private JTable tblTracklist;
     private JButton btnOpen;
     private Controller controller;
+    private List<String[]> values;
+    private List<String> columns;
 
     public MainWindow(Controller controller) {
         setupFrame();
@@ -26,13 +32,14 @@ public class MainWindow extends JFrame {
 
     private void setupFrame() {
         setTitle("MUSIC RENAMER 3000");
-        setSize(600, 700);
+        setSize(800, 700);
         setLocation(900, 100);
         setVisible(true);
         setContentPane(mainPanel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         initButtons();
+        initTracklistTable();
         this.revalidate();
     }
 
@@ -43,5 +50,28 @@ public class MainWindow extends JFrame {
                 controller.loadTrack();
             }
         });
+    }
+
+    private void initTracklistTable() {
+        columns = new ArrayList<>();
+        values = new ArrayList<>();
+
+        columns.add("Filename");
+        columns.add("Title");
+        columns.add("Artist");
+        columns.add("Album");
+
+        TableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
+        tblTracklist.setModel(tableModel);
+    }
+
+    public void addTrackToTable(String filename, String title, String artist, String album){
+        values.add(new String[] {filename, title, artist, album});
+        refreshList();
+    }
+
+    private void refreshList() {
+        TableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
+        tblTracklist.setModel(tableModel);
     }
 }
