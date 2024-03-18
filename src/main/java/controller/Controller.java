@@ -5,9 +5,9 @@ import model.TrackManager;
 import view.MainWindow;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Controller {
-
     private MainWindow view;
     private TrackLoader trackLoader;
     private TrackManager trackManager;
@@ -18,11 +18,13 @@ public class Controller {
     }
 
     public void loadTrack() {
-        File file = trackLoader.loadTrack();
-        trackManager.importTrack(file);
+        File[] files = trackLoader.loadTracks();
+        addTrackToTable(trackManager.importTrack(files));
     }
 
-    public void addTrackToTable(Track track) {
-        view.addTrackToTable(track.getFilename(), track.getTitle(), track.getArtist(), track.getAlbum());
+    public void addTrackToTable(ArrayList<Track> trackList) {
+        for (Track track : trackList) {
+            view.addTrackToTable(track.getFilename(), track.getTitle(), track.getArtist(), track.getAlbum());
+        }
     }
 }

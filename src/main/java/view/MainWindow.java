@@ -65,9 +65,10 @@ public class MainWindow extends JFrame {
         tblTracklist.setModel(tableModel);
     }
 
-    public void addTrackToTable(String filename, String title, String artist, String album){
+    public String addTrackToTable(String filename, String title, String artist, String album){
         values.add(new String[] {filename, title, artist, album});
         refreshList();
+        return String.format("%s %s %s %s", filename, title, artist, album);
     }
 
     private void refreshList() {

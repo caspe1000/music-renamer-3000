@@ -20,25 +20,29 @@ public class TrackManager {
         trackList = new ArrayList<>();
     }
 
-    public void importTrack(File file) {
-        try {
-            Mp3File track = new Mp3File(file);
-            ID3v2 trackTag = track.getId3v2Tag();
+    public ArrayList<Track> importTrack(File[] files) {
+        for (File file : files) {
+            try {
+                Mp3File track = new Mp3File(file);
+                ID3v2 trackTag = track.getId3v2Tag();
 
-            String filename = file.getName();
-            String title = trackTag.getTitle();
-            String artist = trackTag.getArtist();
-            String album = trackTag.getAlbum();
+                String filename = file.getName();
+                String title = trackTag.getTitle();
+                String artist = trackTag.getArtist();
+                String album = trackTag.getAlbum();
 
-            Track newTrack = new Track(filename, title, artist, album);
+                addToTrackList(new Track(filename, title, artist, album));
 
-            trackList.add(newTrack);
-            controller.addTrackToTable(newTrack);
-            System.out.println(newTrack);
-
-        } catch (IOException | UnsupportedTagException | InvalidDataException e) {
-            System.out.println("nej");
+            } catch (IOException | UnsupportedTagException | InvalidDataException e) {
+                e.printStackTrace();
+            }
         }
+        return getTrackList();
+    }
+
+    public String addToTrackList(Track track) {
+        trackList.add(track);
+        return track.toString();
     }
 
     public ArrayList<Track> getTrackList() {
