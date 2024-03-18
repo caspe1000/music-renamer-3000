@@ -21,6 +21,17 @@ public class MainWindow extends JFrame {
     private JScrollPane jspTracklist;
     private JTable tblTracklist;
     private JButton btnOpen;
+    private JTextField txfTitle;
+    private JTextField txfAlbum;
+    private JTextField txfArtist;
+    private JTextField txfFileName;
+    private JButton CLEARButton;
+    private JButton btnSave;
+    private JLabel lblFilename;
+    private JLabel lblTitle;
+    private JLabel lblArtist;
+    private JLabel lblAlbum;
+    private JPanel pnlSave;
     private Controller controller;
     private List<String[]> values;
     private List<String> columns;
