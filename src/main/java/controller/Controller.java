@@ -49,10 +49,10 @@ public class Controller {
     }
 
     /**
-     * A pop up warning the user that they have not selected any files.
-     * @param s The warning message.
+     * A pop up with a message.
+     * @param s The message.
      */
-    public void noTrackSelectedPopup(String s) {
-        view.noTrackSelectedPopup(s);
+    public void createPopup(String s) {
+        view.createPopup(s);
     }
 }

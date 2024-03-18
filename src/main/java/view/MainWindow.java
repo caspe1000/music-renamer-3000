@@ -96,11 +96,11 @@ public class MainWindow extends JFrame {
     }
 
     /**
-     * Displays a pop up box warning the user that they have not selected any tracks.
+     * Displays a pop up with a text.
      * @param message The message to be displayed.
      * @return The message.
      */
-    public String noTrackSelectedPopup(String message) {
+    public String createPopup(String message) {
         JOptionPane.showMessageDialog(null, message);
         return message;
     }

@@ -19,8 +19,7 @@ public class TrackLoader {
     }
 
     /**
-     * Opens a JFileChooser and lets the user select mp3-files. Then adds
-     * them to a File array.
+     * Opens a JFileChooser and lets the user select mp3-files. Then adds them to a File array.
      * @param description A description of what kind of files the user can import.
      * @param extension The file extension for the files.
      * @return An array of files.
@@ -43,7 +42,7 @@ public class TrackLoader {
     }
 
     /**
-     * Converts file objects into mp3 tracks, adds their metadata and finally adds them to the track list.
+     * Converts file objects into mp3 files, gets their metadata, creates a Track object and finally adds them to the track list.
      * @param files A file array.
      * @return An arraylist of tracks.
      */
@@ -63,7 +62,7 @@ public class TrackLoader {
                 trackList.add(new Track(filename, title, artist, album));
             }
         } catch (NullPointerException npe) {
-            controller.noTrackSelectedPopup("No track selected!");
+            controller.createPopup("No track selected!");
         } catch (InvalidDataException | UnsupportedTagException | IOException e) {
             throw new RuntimeException(e);
         }
