@@ -47,7 +47,7 @@ public class MainWindow extends JFrame {
         btnOpen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.loadTrack();
+                openButtonPressed();
             }
         });
     }
@@ -71,8 +71,20 @@ public class MainWindow extends JFrame {
         return String.format("%s %s %s %s", filename, title, artist, album);
     }
 
-    private void refreshList() {
+    private TableModel refreshList() {
         TableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
         tblTracklist.setModel(tableModel);
+        return tableModel;
     }
+
+    public String noTrackSelectedPopup(String message) {
+        JOptionPane.showMessageDialog(null, message);
+        return message;
+    }
+
+    public boolean openButtonPressed() {
+        controller.selectTracks();
+        return true;
+    }
+
 }
