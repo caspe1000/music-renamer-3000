@@ -43,6 +43,9 @@ public class MainWindow extends JFrame {
         this.revalidate();
     }
 
+    /**
+     * Initiates the buttons on the GUI.
+     */
     private void initButtons() {
         btnOpen.addActionListener(new ActionListener() {
             @Override
@@ -52,6 +55,9 @@ public class MainWindow extends JFrame {
         });
     }
 
+    /**
+     * Initiates the track list table on the GUI.
+     */
     private void initTracklistTable() {
         columns = new ArrayList<>();
         values = new ArrayList<>();
@@ -65,23 +71,44 @@ public class MainWindow extends JFrame {
         tblTracklist.setModel(tableModel);
     }
 
+    /**
+     * Adds a track to the table.
+     * @param filename File name of the track.
+     * @param title Title of the track.
+     * @param artist Artist of the track.
+     * @param album Album of the track.
+     * @return A string with all the track info.
+     */
     public String addTrackToTable(String filename, String title, String artist, String album){
         values.add(new String[] {filename, title, artist, album});
-        refreshList();
+        refreshTable();
         return String.format("%s %s %s %s", filename, title, artist, album);
     }
 
-    private TableModel refreshList() {
+    /**
+     * Refreshes the track list table.
+     * @return The table model of the table.
+     */
+    private TableModel refreshTable() {
         TableModel tableModel = new DefaultTableModel(values.toArray(new Object[][] {}), columns.toArray());
         tblTracklist.setModel(tableModel);
         return tableModel;
     }
 
+    /**
+     * Displays a pop up box warning the user that they have not selected any tracks.
+     * @param message The message to be displayed.
+     * @return The message.
+     */
     public String noTrackSelectedPopup(String message) {
         JOptionPane.showMessageDialog(null, message);
         return message;
     }
 
+    /**
+     * Method that runs when the Open button is pressed.
+     * @return A boolean.
+     */
     public boolean openButtonPressed() {
         controller.selectTracks();
         return true;

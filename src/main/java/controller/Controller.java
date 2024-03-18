@@ -20,6 +20,7 @@ public class Controller {
 
     /**
      * Method that runs when the Open-button is pressed in the GUI.
+     * Selects files, converts them to mp3-tracks and displays them.
      */
     public void selectTracks() {
         File[] files = trackLoader.selectFiles("music", "mp3");
@@ -27,21 +28,30 @@ public class Controller {
         displayTrackList(trackManager.getTrackList());
     }
 
-
+    /**
+     * Adds tracks from an arraylist to the track list.
+     * @param tracks The tracks to add.
+     */
     private void addToTrackList(ArrayList<Track> tracks) {
         for (Track t : tracks) {
             trackManager.addToTrackList(t);
         }
     }
 
-
+    /**
+     * Takes the tracks from the track list and displays them on the GUI.
+     * @param trackList
+     */
     private void displayTrackList(ArrayList<Track> trackList) {
         for (Track track : trackList) {
             view.addTrackToTable(track.getFilename(), track.getTitle(), track.getArtist(), track.getAlbum());
         }
     }
 
-
+    /**
+     * A pop up warning the user that they have not selected any files.
+     * @param s The warning message.
+     */
     public void noTrackSelectedPopup(String s) {
         view.noTrackSelectedPopup(s);
     }
