@@ -10,17 +10,20 @@ import java.util.ArrayList;
 public class Controller {
     private MainWindow view;
     private TrackLoader trackLoader;
+    private TrackSaver trackSaver;
     private TrackManager trackManager;
+    private Track selectedTrack;
 
     public Controller(){
         view = new MainWindow(this);
         trackLoader = new TrackLoader(this);
+        trackSaver = new TrackSaver(this);
         trackManager = new TrackManager(this);
     }
 
     /**
      * Method that runs when the Open-button is pressed in the GUI.
-     * Selects files, converts them to mp3-tracks and displays them.
+     * Selects files, converts them to mp3-files, then to Track-objects and then displays them.
      */
     public void selectTracks() {
         File[] files = trackLoader.selectFiles("music", "mp3");
@@ -55,4 +58,23 @@ public class Controller {
     public void createPopup(String s) {
         view.createPopup(s);
     }
+
+    public void setSelectedTrack(String filename, String title, String artist, String album) {
+        selectedTrack = findTrack(filename, title, artist, album);
+        view.fillTextfields(filename, title, artist, album);
+    }
+
+    private Track findTrack(String filename, String title, String artist, String album) {
+        for (Track t : trackManager.getTrackList()) {
+            if (t.getFilename().equals(filename) && t.getTitle().equals(title) && t.getArtist().equals(artist) && t.getAlbum().equals(album)) {
+                return t;
+            }
+        }
+        return new Track(filename, title, artist, album, "");
+    }
+
+    public void saveNewInfo(String newFilename, String newTitle, String newArtist, String newAlbum) {
+        trackSaver.saveNewTrackInfo(selectedTrack, newFilename, newTitle, newArtist, newAlbum);
+    }
+
 }

@@ -6,12 +6,14 @@ public class Track {
     private String title;
     private String artist;
     private String album;
+    private String filepath;
 
-    public Track(String filename, String title, String artist, String album) {
+    public Track(String filename, String title, String artist, String album, String filepath) {
         this.filename = filename;
         this.title = title;
         this.artist = artist;
         this.album = album;
+        this.filepath = filepath;
     }
 
     public String getFilename() {
@@ -44,6 +46,14 @@ public class Track {
 
     public void setAlbum(String album) {
         this.album = album;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
     }
 
     public String toString() {

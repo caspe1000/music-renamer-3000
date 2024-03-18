@@ -58,8 +58,9 @@ public class TrackLoader {
                 String title = trackTag.getTitle();
                 String artist = trackTag.getArtist();
                 String album = trackTag.getAlbum();
+                String filepath = file.getParent() + "\\";
 
-                trackList.add(new Track(filename, title, artist, album));
+                trackList.add(new Track(filename, title, artist, album, filepath));
             }
         } catch (NullPointerException npe) {
             controller.createPopup("No track selected!");
