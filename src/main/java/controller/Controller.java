@@ -59,11 +59,26 @@ public class Controller {
         view.createPopup(s);
     }
 
+    /**
+     * Sets the selected track to the one that is highlighted in the GUI.
+     * @param filename Filename for the track.
+     * @param title The track's title.
+     * @param artist The track's artist.
+     * @param album The track's album.
+     */
     public void setSelectedTrack(String filename, String title, String artist, String album) {
         selectedTrack = findTrack(filename, title, artist, album);
         view.fillTextfields(filename, title, artist, album);
     }
 
+    /**
+     * Finds a track on the computer.
+     * @param filename Filename for the track.
+     * @param title The track's title.
+     * @param artist The track's artist.
+     * @param album The track's album.
+     * @return The track.
+     */
     private Track findTrack(String filename, String title, String artist, String album) {
         for (Track t : trackManager.getTrackList()) {
             if (t.getFilename().equals(filename) && t.getTitle().equals(title) && t.getArtist().equals(artist) && t.getAlbum().equals(album)) {
@@ -73,8 +88,16 @@ public class Controller {
         return new Track(filename, title, artist, album, "");
     }
 
-    public void saveNewInfo(String newFilename, String newTitle, String newArtist, String newAlbum) {
-        trackSaver.saveNewTrackInfo(selectedTrack, newFilename, newTitle, newArtist, newAlbum);
+    /**
+     * Saves the new track info to the track.
+     * @param newFilename New filename for the track.
+     * @param newTitle The track's new title.
+     * @param newArtist The track's new artist.
+     * @param newAlbum The track's new album.
+     * @return The new filepath.
+     */
+    public String saveNewInfo(String newFilename, String newTitle, String newArtist, String newAlbum) {
+        return trackSaver.saveNewTrackInfo(selectedTrack, newFilename, newTitle, newArtist, newAlbum);
     }
 
 }

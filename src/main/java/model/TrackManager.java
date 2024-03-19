@@ -20,11 +20,20 @@ public class TrackManager {
         trackList = new ArrayList<>();
     }
 
+    /**
+     * Adds a track to the track list.
+     * @param track The track
+     * @return The track's info.
+     */
     public String addToTrackList(Track track) {
         trackList.add(track);
         return getTrackList().get(getTrackList().size()-1).toString();
     }
 
+    /**
+     * Getter for the track list.
+     * @return The track list.
+     */
     public ArrayList<Track> getTrackList() {
         return trackList;
     }
