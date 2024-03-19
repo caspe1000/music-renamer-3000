@@ -39,7 +39,6 @@ public class MainWindow extends JFrame {
     public MainWindow(Controller controller) {
         setupFrame();
         this.controller = controller;
-
     }
 
     /**
