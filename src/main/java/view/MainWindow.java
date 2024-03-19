@@ -187,29 +187,17 @@ public class MainWindow extends JFrame {
     private void addMouseListenerToTable() {
         tblTracklist.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
+            public void mouseClicked(MouseEvent e) {}
             @Override
             public void mousePressed(MouseEvent e) {
                 getSelectedRowInfo();
             }
-
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
+            public void mouseReleased(MouseEvent e) {}
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
+            public void mouseEntered(MouseEvent e) {}
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         });
     }
 
