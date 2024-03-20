@@ -32,6 +32,7 @@ public class MainWindow extends JFrame {
     private JLabel lblArtist;
     private JLabel lblAlbum;
     private JPanel pnlSave;
+    private JLabel lblLogo;
     private Controller controller;
     private List<String[]> values;
     private List<String> columns;
@@ -160,7 +161,13 @@ public class MainWindow extends JFrame {
         setResizable(false);
         initButtons();
         initTracklistTable();
+        loadLogo();
         this.revalidate();
+    }
+
+    private void loadLogo() {
+        ImageIcon logo = new ImageIcon("src/main/resources/logo.png");
+        lblLogo.setIcon(logo);
     }
 
     /**
