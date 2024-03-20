@@ -122,6 +122,32 @@ public class MainWindow extends JFrame {
     }
 
     /**
+     * Method that runs when the Clear button is pressed.
+     */
+    private void clearButtonPressed() {
+        controller.clearTable();
+    }
+
+    /**
+     * Removes all tracks from the table.
+     */
+    public void clearTable() {
+        DefaultTableModel model = (DefaultTableModel) tblTracklist.getModel();
+        model.setRowCount(0);
+        values.clear();
+    }
+
+    /**
+     * Clears all text fields.
+     */
+    public void clearTextFields() {
+        txfFileName.setText("");
+        txfTitle.setText("");
+        txfArtist.setText("");
+        txfAlbum.setText("");
+    }
+
+    /**
      * Set up the JFrame.
      */
     private void setupFrame() {
@@ -158,10 +184,11 @@ public class MainWindow extends JFrame {
         btnClear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                clearButtonPressed();
             }
         });
     }
+
 
     /**
      * Initiates the track list table on the GUI.

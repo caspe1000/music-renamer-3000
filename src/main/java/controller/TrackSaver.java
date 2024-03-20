@@ -15,7 +15,6 @@ public class TrackSaver {
         this.controller = controller;
     }
 
-
     /**
      * Takes the selected track from the GUI and changes its metadata.
      * Then calls methods to save it to file.
@@ -28,30 +27,33 @@ public class TrackSaver {
      */
     public String saveNewTrackInfo(Track selectedTrack, String newFilename, String newTitle, String newArtist, String newAlbum) {
 
-        try {
-            Mp3File track = new Mp3File(selectedTrack.getFilepath() + selectedTrack.getFilename());
+        if (selectedTrack != null) {
+            try {
+                Mp3File track = new Mp3File(selectedTrack.getFilepath() + selectedTrack.getFilename());
 
-            ID3v2 trackTag;
-            if (track.hasId3v2Tag()) {
-                trackTag = track.getId3v2Tag();
-            } else {
-                trackTag = new ID3v24Tag();
-                track.setId3v2Tag(trackTag);
+                ID3v2 trackTag;
+                if (track.hasId3v2Tag()) {
+                    trackTag = track.getId3v2Tag();
+                } else {
+                    trackTag = new ID3v24Tag();
+                    track.setId3v2Tag(trackTag);
+                }
+
+                trackTag.setTitle(newTitle);
+                trackTag.setArtist(newArtist);
+                trackTag.setAlbum(newAlbum);
+
+                saveToFile(track, selectedTrack.getFilepath(), newFilename);
+                deleteOldTrack(selectedTrack);
+                renameFile(selectedTrack.getFilepath(), newFilename);
+
+                return selectedTrack.getFilepath() + newFilename;
+            } catch (InvalidDataException | UnsupportedTagException | IOException e) {
+                e.printStackTrace();
+                return "Could not save track to file.";
             }
-
-            trackTag.setTitle(newTitle);
-            trackTag.setArtist(newArtist);
-            trackTag.setAlbum(newAlbum);
-
-            saveToFile(track, selectedTrack.getFilepath(), newFilename);
-            deleteOldTrack(selectedTrack);
-            renameFile(selectedTrack.getFilepath(), newFilename);
-
-            return selectedTrack.getFilepath() + newFilename;
-        } catch (InvalidDataException | UnsupportedTagException | IOException e) {
-            e.printStackTrace();
-            return "Could not save track to file.";
         }
+        return null;
     }
 
 

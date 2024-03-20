@@ -23,9 +23,10 @@ public class Controller {
 
     /**
      * Method that runs when the Open-button is pressed in the GUI.
-     * Selects files, converts them to mp3-files, then to Track-objects and then displays them.
+     * Clears the track list, selects files, converts them to mp3-files, then to Track-objects and then displays them.
      */
     public void selectTracks() {
+        clearTable();
         File[] files = trackLoader.selectFiles("music", "mp3");
         addToTrackList(trackLoader.convertFilesToTracks(files));
         displayTrackList(trackManager.getTrackList());
@@ -72,6 +73,13 @@ public class Controller {
     }
 
     /**
+     * Sets the selected track to null.
+     */
+    public void clearSelectedTrack() {
+        selectedTrack = null;
+    }
+
+    /**
      * Finds a track on the computer.
      * @param filename Filename for the track.
      * @param title The track's title.
@@ -98,6 +106,16 @@ public class Controller {
      */
     public String saveNewInfo(String newFilename, String newTitle, String newArtist, String newAlbum) {
         return trackSaver.saveNewTrackInfo(selectedTrack, newFilename, newTitle, newArtist, newAlbum);
+    }
+
+    /**
+     * Clears the table from all info.
+     */
+    public void clearTable() {
+        view.clearTable();
+        view.clearTextFields();
+        trackManager.clearTrackList();
+        clearSelectedTrack();
     }
 
 }

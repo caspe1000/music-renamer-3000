@@ -38,5 +38,14 @@ public class TrackManager {
         return trackList;
     }
 
+    /**
+     * Clears the track list.
+     * @return The empty track list.
+     */
+    public ArrayList<Track> clearTrackList() {
+        trackList.clear();
+        return getTrackList();
+    }
+
 
 }
