@@ -14,6 +14,9 @@ public class Controller {
     private TrackManager trackManager;
     private Track selectedTrack;
 
+    /**
+     * Constructor for the Controller class. Creates the GUI, Track Loader, Track Saver and Track Manager.
+     */
     public Controller(){
         view = new MainWindow(this);
         trackLoader = new TrackLoader(this);
@@ -118,4 +121,46 @@ public class Controller {
         clearSelectedTrack();
     }
 
+    /**
+     * Copies the selected artist to all other tracks in the table.
+     */
+    public void copyArtist() {
+        if (selectedTrack != null) {
+            for (int i = 0; i < trackManager.getTrackList().size(); i++) {
+                view.setArtist(selectedTrack.getArtist(), i);
+            }
+        }
+    }
+
+    /**
+     * Copies the selected album to all other tracks in the table.
+     */
+    public void copyAlbum() {
+        if (selectedTrack != null) {
+            for (int i = 0; i < trackManager.getTrackList().size(); i++) {
+                view.setAlbum(selectedTrack.getAlbum(), i);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param newFilename New filename for the track.
+     * @param newTitle The track's new title.
+     * @param newArtist The track's new artist.
+     * @param newAlbum The track's new album.
+     * @param row The row to change info at.
+     */
+    public void updateSelectedTrackInfo(String newFilename, String newTitle, String newArtist, String newAlbum, int row) {
+        view.updateTrackInfoInGUI(newFilename, newTitle, newArtist, newAlbum, row);
+    }
+
+
+
+    // Någon slags check för album/artistgrejen.
+//    public void saveMultipleTracks() {
+//        for (Track t : trackManager.getTrackList()) {
+//            saveNewInfo(t.getFilename(), t.getTitle(), selectedTrack.getArtist(), selectedTrack.getAlbum());
+//        }
+//    }
 }

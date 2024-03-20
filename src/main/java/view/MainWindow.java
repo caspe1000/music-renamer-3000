@@ -17,7 +17,7 @@ public class MainWindow extends JFrame {
     private JPanel pnlBackground;
     private JPanel pnlTop;
     private JPanel pnlCenter;
-    private JPanel pnlBot;
+    private JPanel pnlCenterLow;
     private JScrollPane jspTracklist;
     private JTable tblTracklist;
     private JButton btnOpen;
@@ -33,6 +33,10 @@ public class MainWindow extends JFrame {
     private JLabel lblAlbum;
     private JPanel pnlSave;
     private JLabel lblLogo;
+    private JPanel pnlBot;
+    private JButton btnMultiCopyArtist;
+    private JButton btnMultiCopyAlbum;
+    private JButton btnMultiSave;
     private Controller controller;
     private List<String[]> values;
     private List<String> columns;
@@ -40,6 +44,7 @@ public class MainWindow extends JFrame {
     public MainWindow(Controller controller) {
         setupFrame();
         this.controller = controller;
+
     }
 
     /**
@@ -120,6 +125,22 @@ public class MainWindow extends JFrame {
      */
     private void saveButtonPressed(String newFilename, String newTitle, String newArtist, String newAlbum) {
         controller.saveNewInfo(newFilename, newTitle, newArtist, newAlbum);
+        controller.updateSelectedTrackInfo(newFilename, newTitle, newArtist, newAlbum, tblTracklist.getSelectedRow());
+    }
+
+    /**
+     *
+     * @param newFilename New filename for the track.
+     * @param newTitle The track's new title.
+     * @param newArtist The track's new artist.
+     * @param newAlbum The track's new album.
+     * @param row The row to change info at.
+     */
+    public void updateTrackInfoInGUI(String newFilename, String newTitle, String newArtist, String newAlbum, int row) {
+        tblTracklist.getModel().setValueAt(newFilename, row, 0);
+        tblTracklist.getModel().setValueAt(newTitle, row, 1);
+        tblTracklist.getModel().setValueAt(newArtist, row, 2);
+        tblTracklist.getModel().setValueAt(newAlbum, row, 3);
     }
 
     /**
@@ -149,6 +170,43 @@ public class MainWindow extends JFrame {
     }
 
     /**
+     * Method that runs when the Copy Artist button is pressed.
+     */
+    private void multiCopyArtistButtonPressed() {
+        controller.copyArtist();
+    }
+
+    /**
+     * Sets the artist.
+     * @param artist The artist.
+     * @param row The row to set at.
+     */
+    public void setArtist(String artist, int row) {
+        tblTracklist.getModel().setValueAt(artist, row, 2);
+    }
+
+    /**
+     * Method that runs when the Copy Album button is pressed.
+     */
+    private void multiCopyAlbumButtonPressed() {
+        controller.copyAlbum();
+    }
+
+    /**
+     * Sets the album.
+     * @param album The album.
+     * @param row The row to set at.
+     */
+    public void setAlbum(String album, int row) {
+        tblTracklist.getModel().setValueAt(album, row, 3);
+    }
+
+    private void multiSaveButtonPressed() {
+        controller.saveMultipleTracks();
+    }
+
+
+    /**
      * Set up the JFrame.
      */
     private void setupFrame() {
@@ -165,6 +223,9 @@ public class MainWindow extends JFrame {
         this.revalidate();
     }
 
+    /**
+     * Loads the logo.
+     */
     private void loadLogo() {
         ImageIcon logo = new ImageIcon("src/main/resources/logo.png");
         lblLogo.setIcon(logo);
@@ -194,7 +255,29 @@ public class MainWindow extends JFrame {
                 clearButtonPressed();
             }
         });
+
+        btnMultiCopyArtist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                multiCopyArtistButtonPressed();
+            }
+        });
+
+        btnMultiCopyAlbum.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                multiCopyAlbumButtonPressed();
+            }
+        });
+
+        btnMultiSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                multiSaveButtonPressed();
+            }
+        });
     }
+
 
 
     /**
